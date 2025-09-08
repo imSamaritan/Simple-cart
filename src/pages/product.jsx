@@ -1,18 +1,41 @@
 import { useParams } from "@solidjs/router"
+import { usingCartContext } from "../context/CartContext"
 import { createResource, Show } from "solid-js"
 import Card from "../components/Card"
 import Button from "../components/Button"
 
 const getProduct = async (id) => {
-   const request = await fetch(`http://localhost:4500/products/${id}`)
-   const product = await request.json()
+  const request = await fetch(`http://localhost:4500/products/${id}`)
+  const product = await request.json()
 
-   return product
+  return product
 }
 
 function Product() {
   const { id } = useParams()
   const [product] = createResource(id, getProduct)
+  const { items, setItem } = usingCartContext()
+  
+  const addToCart = (id) => {
+    let item = items.find((product) => product.id === id)
+
+    if (item === undefined) {
+      item = {
+        id: product().id,
+        title: product().title,
+        quantity: 1,
+        price: product().price,
+        img: product().img,
+      }
+      setItem([item, ...items])
+    } else {
+      setItem(
+        (product) => product.id === id,
+        "quantity",
+        (q) => (q += 1)
+      )
+    }
+  }
 
   return (
     <div class="px-3">
@@ -29,7 +52,10 @@ function Product() {
                 R{((product().price + product().price) * 1.9).toFixed(2)}
               </p>
               <p class="mt-3">
-                <Button href={`/cart/${product().id}`} class="has-text-dark has-background-warning button">
+                <Button
+                  class="has-text-dark has-background-warning button"
+                  onClick={() => addToCart(product().id)}
+                >
                   Buy Now
                 </Button>
               </p>

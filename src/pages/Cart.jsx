@@ -1,9 +1,9 @@
-import { usingContext } from "../context/CartContext"
+import { usingCartContext } from "../context/CartContext"
 import { For } from "solid-js"
 import Card from "../components/Card"
 
 function Cart() {
-  const { items } = usingContext()
+  const { items } = usingCartContext()
 
   return (
     <Card>
@@ -18,7 +18,8 @@ function Cart() {
                 <p>{item.title}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>
-                  Price: R{((item.price + item.price) * 1.9).toFixed(2) * item.quantity}
+                  Price: R
+                  {((item.price + item.price) * 1.9).toFixed(2) * item.quantity}
                 </p>
               </div>
             </div>

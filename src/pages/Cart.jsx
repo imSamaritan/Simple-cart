@@ -4,7 +4,10 @@ import Card from "../components/Card"
 
 function Cart() {
   const { items } = usingCartContext()
-
+  const formartZAR = new Intl.NumberFormat("en-SA", {
+    style: "currency",
+    currency: "ZAR",
+  })
   return (
     <Card>
       <div class="card-content">
@@ -18,8 +21,8 @@ function Cart() {
                 <p>{item.title}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>
-                  Price: R
-                  {((item.price + item.price) * 1.9).toFixed(2) * item.quantity}
+                  Price:
+                  {formartZAR.format(item.price * 2 * 1.9 * item.quantity)}
                 </p>
               </div>
             </div>

@@ -20,7 +20,7 @@ render(
       <Router root={App}>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/cart/:id" component={Cart} />
+        <Route path="/cart" component={Cart} />
         <Route path="/product/:id" component={Product} />
       </Router>
     </CartContextProvider>

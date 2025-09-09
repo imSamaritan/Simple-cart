@@ -14,28 +14,7 @@ const getProduct = async (id) => {
 function Product() {
   const { id } = useParams()
   const [product] = createResource(id, getProduct)
-  const { items, setItem } = usingCartContext()
-  
-  const addToCart = (id) => {
-    let item = items.find((product) => product.id === id)
-
-    if (item === undefined) {
-      item = {
-        id: product().id,
-        title: product().title,
-        quantity: 1,
-        price: product().price,
-        img: product().img,
-      }
-      setItem([item, ...items])
-    } else {
-      setItem(
-        (product) => product.id === id,
-        "quantity",
-        (q) => (q += 1)
-      )
-    }
-  }
+  const { addToCart } = usingCartContext()
 
   return (
     <div class="px-3">
@@ -54,7 +33,7 @@ function Product() {
               <p class="mt-3">
                 <Button
                   class="has-text-dark has-background-warning button"
-                  onClick={() => addToCart(product().id)}
+                  onClick={() => addToCart(product().id, product())}
                 >
                   Buy Now
                 </Button>

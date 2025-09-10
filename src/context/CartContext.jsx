@@ -31,8 +31,19 @@ function CartContextProvider(props) {
     }
   }
 
+  const removeCartItem = (id) => {
+    let item = items.find((product) => product.id === id)
+
+    if (item.quantity > 1) {
+      setItem((product) => product.id === id, "quantity", (q) => q -= 1)
+    }
+    else {
+      setItem(items.filter((item) => item.id != id))
+    }
+  }
+
   return (
-    <CartContext.Provider value={{ items, setItem, total, addToCart }}>
+    <CartContext.Provider value={{ items, setItem, total, addToCart, removeCartItem }}>
       {props.children}
     </CartContext.Provider>
   )

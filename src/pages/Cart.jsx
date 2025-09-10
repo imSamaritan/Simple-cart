@@ -4,11 +4,13 @@ import Card from "../components/Card"
 import Button from "../components/Button"
 
 function Cart() {
-  const { items, addToCart } = usingCartContext()
+  const { items, addToCart, removeCartItem } = usingCartContext()
   const formartZAR = new Intl.NumberFormat("en-SA", {
     style: "currency",
     currency: "ZAR",
   })
+  const interestPercentage = 1.9
+
   return (
     <Card>
       <div class="card-content">
@@ -23,13 +25,21 @@ function Cart() {
                 <p>Quantity: {item.quantity}</p>
                 <p>
                   Price:
-                  {formartZAR.format(item.price * 2 * 1.9 * item.quantity)}
+                  {formartZAR.format(
+                    item.price * 2 * interestPercentage * item.quantity
+                  )}
                 </p>
                 <p class="mt-2">
-                  <Button class="decrease button has-text-light has-background-danger has-text-weight-bold">
+                  <Button
+                    class="decrease button has-text-light has-background-danger has-text-weight-bold"
+                    onClick={() => removeCartItem(item.id, item)}
+                  >
                     -
                   </Button>
-                  <Button class="increase button has-text-light has-background-success has-text-weight-bold" onClick={() => addToCart(item.id, item)}>
+                  <Button
+                    class="increase button has-text-light has-background-success has-text-weight-bold"
+                    onClick={() => addToCart(item.id, item)}
+                  >
                     +
                   </Button>
                 </p>

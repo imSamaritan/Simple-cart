@@ -5,7 +5,9 @@ import Card from "../components/Card"
 import Button from "../components/Button"
 
 const getProduct = async (id) => {
-  const request = await fetch(`http://localhost:4500/products/${id}`)
+  const request = await fetch(
+    `https://my-json-server.typicode.com/imsamaritan/simple-cart-data/products/${id}`
+  )
   const product = await request.json()
 
   return product

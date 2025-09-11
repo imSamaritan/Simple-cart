@@ -1,18 +1,10 @@
+import api from "../http/http-client.js"
 import { createResource, Show, For } from "solid-js"
 import Card from "../components/Card.jsx"
 import Button from "../components/Button.jsx"
 
-const getProducts = async () => {
-  const request = await fetch(
-    "https://my-json-server.typicode.com/imsamaritan/simple-cart-data/products"
-  )
-  const products = await request.json()
-
-  return products
-}
-
 function Home() {
-  const [data] = createResource(getProducts)
+  const [data] = createResource("/products", api.getProducts)
   
   return (
     <Show when={data.loading === false} fallback={<p>Loading...</p>}>

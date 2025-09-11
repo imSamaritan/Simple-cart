@@ -1,21 +1,22 @@
+import api from "../http/http-client"
 import { useParams } from "@solidjs/router"
 import { usingCartContext } from "../context/CartContext"
 import { createResource, Show } from "solid-js"
 import Card from "../components/Card"
 import Button from "../components/Button"
 
-const getProduct = async (id) => {
-  const request = await fetch(
-    `https://my-json-server.typicode.com/imsamaritan/simple-cart-data/products/${id}`
-  )
-  const product = await request.json()
+// const getProduct = async (id) => {
+//   const request = await fetch(
+//     `https://my-json-server.typicode.com/imsamaritan/simple-cart-data/products/${id}`
+//   )
+//   const product = await request.json()
 
-  return product
-}
+//   return product
+// }
 
 function Product() {
   const { id } = useParams()
-  const [product] = createResource(id, getProduct)
+  const [product] = createResource({path: "/products", id}, api.getProduct)
   const { addToCart } = usingCartContext()
 
   return (

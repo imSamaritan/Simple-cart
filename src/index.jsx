@@ -10,7 +10,7 @@ import App from "./App.jsx"
 import Home from "./pages/Home.jsx"
 import About from "./pages/About.jsx"
 import Cart from "./pages/Cart.jsx"
-import Product from "./pages/Product.jsx"
+import Product from "./pages/product.jsx"
 
 const root = document.getElementById("root")
 

@@ -15,7 +15,7 @@ const api = {
     return request.data
   },
 
-  getProduct: async (path, id) => {
+  getProduct: async ({path, id}) => {
    const request = await httpClient.get(`${path}/${id}`)
    return request.data
   }

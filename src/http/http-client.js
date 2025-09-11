@@ -9,4 +9,16 @@ const httpClient = axios.create({
   },
 })
 
+const api = {
+  getProducts: async (path) => {
+    const request = await httpClient.get(path)
+    return request.data
+  },
 
+  getProduct: async (path, id) => {
+   const request = await httpClient.get(`${path}/${id}`)
+   return request.data
+  }
+}
+
+export default api
